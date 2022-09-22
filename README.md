@@ -1,0 +1,1 @@
+# TourmalineCore.UserManagementService.Template
