@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  users-db-debug:
+    image: postgres:13
+    restart: always
+    networks:
+      - users-backend
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: Users
+    ports:
+      - 10001:5432
+
+networks:
+  users-backend: {}
