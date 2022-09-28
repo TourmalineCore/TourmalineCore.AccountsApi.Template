@@ -1,0 +1,23 @@
+{
+  "profiles": {
+    "UserManagementService.Api": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "launchUrl": "users",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": "true",
+      "applicationUrl": "http://localhost:5000"
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:7631",
+      "sslPort": 0
+    }
+  }
+}

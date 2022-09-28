@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 using UserManagementService.Core.Entities;
 using UserManagementService.DataAccess;
 
@@ -6,16 +8,16 @@ namespace UserManagementService.Application.Users.Queries
 {
     public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User>
     {
-        private readonly ReadDbContext _readDbContext;
+        private readonly UsersDbContext _dbContext;
 
-        public GetUserByIdQueryHandler(ReadDbContext readDbContext)
+        public GetUserByIdQueryHandler(UsersDbContext dbContext)
         {
-            _readDbContext = readDbContext;
+            _dbContext = dbContext;
         }
 
         public Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            return _readDbContext
+            return _dbContext
                 .QueryableAsNoTracking<User>()
                 .GetByIdAsync(request.Id);
         }

@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 using UserManagementService.Core.Entities;
 using UserManagementService.DataAccess;
 
@@ -6,9 +8,9 @@ namespace UserManagementService.Application.Users.Commands
 {
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
     {
-        private readonly WriteDbContext _writeDbContext;
+        private readonly UsersDbContext _writeDbContext;
 
-        public UpdateUserCommandHandler(WriteDbContext writeDbContext)
+        public UpdateUserCommandHandler(UsersDbContext writeDbContext)
         {
             _writeDbContext = writeDbContext;
         }

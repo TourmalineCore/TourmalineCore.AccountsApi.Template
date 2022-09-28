@@ -3,18 +3,16 @@ using UserManagementService.Core.Entities;
 
 namespace UserManagementService.DataAccess
 {
-    public class ReadDbContext : DbContext
+    public class UsersDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
 
-        public ReadDbContext()
-        {
-            Database.EnsureCreated();
-        }
+        public DbSet<Role> Roles { get; set; }
 
-        public ReadDbContext(DbContextOptions<ReadDbContext> options): base(options)
+        public DbSet<UserRole> UserRoles { get; set; }
+
+        public UsersDbContext(DbContextOptions<UsersDbContext> options): base(options) 
         {
-            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

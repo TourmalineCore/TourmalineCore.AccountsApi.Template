@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using UserManagementService.Api.Dto.Users;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;

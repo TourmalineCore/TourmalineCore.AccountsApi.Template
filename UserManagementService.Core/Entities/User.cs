@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using UserManagementService.Core.Interfaces;
+using System.Collections.Generic;
 
 namespace UserManagementService.Core.Entities
 {
@@ -10,6 +11,8 @@ namespace UserManagementService.Core.Entities
         public string Surname { get; set; }
 
         public string Patronymic { get; set; }
+
+        public IEnumerable<UserRole> UserRoles { get; set; }
 
         // For DB Context
         public User()

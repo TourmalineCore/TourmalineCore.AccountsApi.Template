@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 using UserManagementService.Core.Entities;
 using UserManagementService.DataAccess;
 
@@ -10,9 +12,9 @@ namespace UserManagementService.Application.Users.Commands
 
         public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
         {
-            private readonly WriteDbContext _writeDbContext;
+            private readonly UsersDbContext _writeDbContext;
 
-            public DeleteUserCommandHandler(WriteDbContext writeDbContext)
+            public DeleteUserCommandHandler(UsersDbContext writeDbContext)
             {
                 _writeDbContext = writeDbContext;
             }

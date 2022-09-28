@@ -6,12 +6,17 @@ namespace UserManagementService.DataAccess
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<WriteDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<ReadDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration) 
+            {
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                
+                services.AddDbContext<UsersDbContext>(options =>
+                {
+                    options.UseNpgsql(connectionString);
+                });
 
-            return services;
+                services.AddScoped<UsersDbContext>();
+                return services;
+            }
         }
-    }
 }
