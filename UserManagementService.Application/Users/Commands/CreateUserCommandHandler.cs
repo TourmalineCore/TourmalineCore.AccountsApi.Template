@@ -7,10 +7,12 @@ namespace UserManagementService.Application.Users.Commands
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, long>
     {
         private readonly WriteDbContext _writeDbContext;
+        private readonly ReadDbContext _readDbContext;
 
-        public CreateUserCommandHandler(WriteDbContext writeDbContext)
+        public CreateUserCommandHandler(WriteDbContext writeDbContext, ReadDbContext readDbContext)
         {
             _writeDbContext = writeDbContext;
+            _readDbContext = readDbContext;
         }
 
         public async Task<long> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -24,6 +26,10 @@ namespace UserManagementService.Application.Users.Commands
 
             await _writeDbContext.AddAsync(user);
             await _writeDbContext.SaveChangesAsync();
+
+            // Need to save in read base
+            //await _readDbContext.AddAsync(user);
+            //await _readDbContext.SaveChangesAsync();
 
             return user.Id;
         }

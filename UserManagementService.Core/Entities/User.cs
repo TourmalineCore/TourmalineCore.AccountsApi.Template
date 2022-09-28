@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using UserManagementService.Core.Interfaces;
 
 namespace UserManagementService.Core.Entities
 {
-    public class User : IdentityUser<long>
+    public class User : IdentityUser<long>, IIdentityEntity
     {
         public string Name { get; set; }
 
@@ -10,6 +11,7 @@ namespace UserManagementService.Core.Entities
 
         public string Patronymic { get; set; }
 
+        // For DB Context
         public User()
         {
 
@@ -22,6 +24,15 @@ namespace UserManagementService.Core.Entities
             
             // ToDo add password hash
             PasswordHash = password;
+            Name = name;
+            Surname = surname;
+            Patronymic = patronymic;
+        }
+
+        public void Update(string userName, string email, string name, string surname, string patronymic)
+        {
+            UserName = userName;
+            Email = email;
             Name = name;
             Surname = surname;
             Patronymic = patronymic;
