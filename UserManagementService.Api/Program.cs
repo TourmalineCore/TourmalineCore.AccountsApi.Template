@@ -6,7 +6,7 @@ using Serilog.Events;
 using System;
 using UserManagementService.DataAccess;
 
-namespace UserManagementService.Api1
+namespace UserManagementService.Api
 {
     public class Program
     {

@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UserManagementService.Core.Contracts;
+using UserManagementService.DataAccess.Respositories;
 
 namespace UserManagementService.DataAccess
 {
     public static class DependencyInjection
     {
-            public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration) 
+        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration) 
             {
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
                 
@@ -16,7 +18,11 @@ namespace UserManagementService.DataAccess
                 });
 
                 services.AddScoped<UsersDbContext>();
-                return services;
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            
+            return services;
             }
         }
 }

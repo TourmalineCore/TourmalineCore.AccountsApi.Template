@@ -1,17 +1,22 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using UserManagementService.Core.Interfaces;
-using System.Collections.Generic;
 
 namespace UserManagementService.Core.Entities
 {
     public class Role : IdentityRole<long>, IIdentityEntity
     {
-        // For DB Context
-        public Role()
-        {
+        private Role() { }
 
+        public Role(string name)
+        {
+            Name = name;
+            NormalizedName = name.Normalize();
         }
 
-        public IEnumerable<UserRole> UserRoles { get; set; }
+        public void Update(string name)
+        {
+            Name = name;
+            NormalizedName = name.Normalize();
+        }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using UserManagementService.Core.Entities;
-using UserManagementService.DataAccess;
+using UserManagementService.Core.Contracts;
 
 namespace UserManagementService.Application.Users.Commands
 {
@@ -12,22 +11,18 @@ namespace UserManagementService.Application.Users.Commands
 
         public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
         {
-            private readonly UsersDbContext _writeDbContext;
+            private readonly IUserRepository _userRepository;
 
-            public DeleteUserCommandHandler(UsersDbContext writeDbContext)
+            public DeleteUserCommandHandler(IUserRepository userRepository)
             {
-                _writeDbContext = writeDbContext;
+                _userRepository = userRepository;
             }
 
             public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
             {
-                var user = await _writeDbContext
-                .Queryable<User>()
-                .GetByIdAsync(request.Id);
+                var user = await _userRepository.FindOneAsync(request.Id);
 
-                _writeDbContext.Remove(user);
-
-                await _writeDbContext.SaveChangesAsync();
+                await _userRepository.RemoveAsync(user);
 
                 return Unit.Value;
             }

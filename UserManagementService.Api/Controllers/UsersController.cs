@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UserManagementService.Api.Dto.Users;
 using UserManagementService.Application.Users.Commands;
@@ -17,12 +19,35 @@ namespace UserManagementService.Api.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("all")]
+        public async Task<IEnumerable<UserDto>> FindById([FromQuery] GetUserListQuery getUserListQuery)
+        {
+            var users = await _mediator.Send(getUserListQuery);
+
+            return users.Select(x => new UserDto(
+                x.Id, 
+                x.UserName,
+                x.Email, 
+                x.Name, 
+                x.Surname, 
+                x.Patronymic
+                )
+            );
+        }
+
         [HttpGet("find")]
         public async Task<UserDto> FindById([FromQuery] GetUserByIdQuery getUserByIdQuery)
         {
             var user = await _mediator.Send(getUserByIdQuery);
 
-            return new UserDto(user.UserName, user.Email, user.Name, user.Surname, user.Patronymic);
+            return new UserDto(
+                user.Id, 
+                user.UserName, 
+                user.Email, 
+                user.Name, 
+                user.Surname, 
+                user.Patronymic
+                );
         }
 
         [HttpPost("create")]
