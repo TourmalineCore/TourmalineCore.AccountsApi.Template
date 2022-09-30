@@ -35,12 +35,7 @@ namespace UserManagementService.Api.Controllers
         {
             var roles = await _getRoleListQueryHandler.Handle(getRoleListQuery);
 
-            return roles.Select(x => new RoleDto(
-                x.Id, 
-                x.Name, 
-                x.NormalizedName
-                )
-            );
+            return roles.Select(x => new RoleDto(x.Id, x.Name));
         }
 
         [HttpGet("find")]
@@ -48,7 +43,7 @@ namespace UserManagementService.Api.Controllers
         {
             var role = await _getRoleByIdQueryHandler.Handle(getRoleByIdQuery);
 
-            return new RoleDto(role.Id, role.Name, role.NormalizedName);
+            return new RoleDto(role.Id, role.Name);
         }
 
         [HttpPost("create")]

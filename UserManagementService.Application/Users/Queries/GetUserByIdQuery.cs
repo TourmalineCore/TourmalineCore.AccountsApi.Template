@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using UserManagementService.Core.Entities;
 using UserManagementService.Core.Contracts;
 using UserManagementService.Application.Contracts;
 
@@ -10,7 +9,7 @@ namespace UserManagementService.Application.Users.Queries
         public long Id { get; set; }
     }
 
-    public class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, User>
+    public class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, UserDto>
     {
         private readonly IUserRepository _userRepository;
 
@@ -19,9 +18,11 @@ namespace UserManagementService.Application.Users.Queries
             _userRepository = userRepository;
         }
 
-        public Task<User> Handle(GetUserByIdQuery request)
+        public async Task<UserDto> Handle(GetUserByIdQuery request)
         {
-            return _userRepository.FindOneAsync(request.Id);
+            var userEntity = await _userRepository.FindOneAsync(request.Id);
+
+            return UserDto.MapFrom(userEntity);
         }
     }
 }

@@ -32,11 +32,14 @@ namespace UserManagementService.Core.Entities
             RoleId = roleId;
         }
 
-        public void Update(string name, string surname, string email, long roleId)
+        public void Update(string name, string surname, string email, string password, long roleId)
         {
             Name = name;
             Surname = surname;
             Email = email;
+
+            // ToDo add password hash
+            Password = password;
             RoleId = roleId;
         }
 

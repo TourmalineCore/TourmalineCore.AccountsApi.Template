@@ -52,7 +52,7 @@ namespace UserManagementService.Api.Controllers
             var user = await _getUserByIdQueryHandler.Handle(getUserByIdQuery);
 
             return new UserDto(
-                 user.Id,
+                user.Id,
                 user.Name,
                 user.Surname,
                 user.Email,

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserManagementService.Core.Contracts;
-using UserManagementService.Core.Entities;
 using UserManagementService.Application.Contracts;
+using System.Linq;
 
 namespace UserManagementService.Application.Users.Queries
 {
@@ -10,7 +10,7 @@ namespace UserManagementService.Application.Users.Queries
     {
     }
 
-    public class GetUserListQueryHandler : IQueryHandler<GetUserListQuery, IEnumerable<User>>
+    public class GetUserListQueryHandler : IQueryHandler<GetUserListQuery, IEnumerable<UserDto>>
     {
         private readonly IUserRepository _userRepository;
 
@@ -19,9 +19,18 @@ namespace UserManagementService.Application.Users.Queries
             _userRepository = userRepository;
         }
 
-        public Task<IEnumerable<User>> Handle(GetUserListQuery request)
+        public async Task<IEnumerable<UserDto>> Handle(GetUserListQuery request)
         {
-            return _userRepository.GetAllAsync();
+            var userEntities = await _userRepository.GetAllAsync();
+
+            return userEntities.Select(x => new UserDto(
+                x.Id,
+                x.Name, 
+                x.Surname, 
+                x.Email, 
+                x.RoleId
+                )
+            );
         }
     }
 }

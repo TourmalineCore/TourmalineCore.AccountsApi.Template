@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using UserManagementService.Application.Contracts;
 using UserManagementService.Core.Contracts;
-using UserManagementService.Core.Entities;
 
 namespace UserManagementService.Application.Roles.Queries
 {
@@ -10,7 +9,7 @@ namespace UserManagementService.Application.Roles.Queries
         public long Id { get; set; }
     }
 
-    public class GetRoleByIdQueryHandler : IQueryHandler<GetRoleByIdQuery, Role>
+    public class GetRoleByIdQueryHandler : IQueryHandler<GetRoleByIdQuery, RoleDto>
     {
         private readonly IRoleRepository _roleRepository;
 
@@ -19,9 +18,11 @@ namespace UserManagementService.Application.Roles.Queries
             _roleRepository = roleRepository;
         }
 
-        public Task<Role> Handle(GetRoleByIdQuery request)
+        public async Task<RoleDto> Handle(GetRoleByIdQuery request)
         {
-            return _roleRepository.FindOneAsync(request.Id);
+            var roleEntity = await _roleRepository.FindOneAsync(request.Id);
+
+            return new RoleDto(roleEntity.Id, roleEntity.Name);
         }
     }
 }

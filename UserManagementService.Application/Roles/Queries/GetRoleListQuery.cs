@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserManagementService.Core.Contracts;
-using UserManagementService.Core.Entities;
 using UserManagementService.Application.Contracts;
+using System.Linq;
 
 namespace UserManagementService.Application.Roles.Queries
 {
@@ -10,7 +10,7 @@ namespace UserManagementService.Application.Roles.Queries
     {
     }
 
-    public class GetRoleListQueryHandler : IQueryHandler<GetRoleListQuery, IEnumerable<Role>>
+    public class GetRoleListQueryHandler : IQueryHandler<GetRoleListQuery, IEnumerable<RoleDto>>
     {
         private readonly IRoleRepository _roleRepository;
 
@@ -19,9 +19,11 @@ namespace UserManagementService.Application.Roles.Queries
             _roleRepository = roleRepository;
         }
 
-        public Task<IEnumerable<Role>> Handle(GetRoleListQuery request)
+        public async Task<IEnumerable<RoleDto>> Handle(GetRoleListQuery request)
         {
-            return _roleRepository.GetAllAsync();
+            var roleEntities = await _roleRepository.GetAllAsync();
+
+            return roleEntities.Select(x => new RoleDto(x.Id, x.Name));
         }
     }
 }

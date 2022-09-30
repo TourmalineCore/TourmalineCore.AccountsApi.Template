@@ -36,6 +36,7 @@ namespace UserManagementService.Application.Users.Commands
                 request.Name,
                 request.Surname,
                 request.Email,
+                request.Password,
                 request.RoleId
             );
 
