@@ -1,31 +1,27 @@
-﻿using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using System.Threading.Tasks;
 using UserManagementService.Core.Contracts;
+using UserManagementService.Application.Contracts;
 
 namespace UserManagementService.Application.Roles.Commands
 {
-    public partial class DeleteRoleCommand : IRequest
+    public partial class DeleteRoleCommand
     {
         public long Id { get; set; }
+    }
 
-        public class DeleteRoleCommandHandler : IRequestHandler<DeleteRoleCommand>
+    public class DeleteRoleCommandHandler : ICommandHandler<DeleteRoleCommand>
+    {
+        private readonly IRoleRepository _roleRepository;
+        
+        public DeleteRoleCommandHandler(IRoleRepository roleRepository)
         {
-            private readonly IRoleRepository _roleRepository;
-
-            public DeleteRoleCommandHandler(IRoleRepository roleRepository)
-            {
-                _roleRepository = roleRepository;
-            }
-
-            public async Task<Unit> Handle(DeleteRoleCommand request, CancellationToken cancellationToken)
-            {
-                var role = await _roleRepository.FindOneAsync(request.Id);
-
-                await _roleRepository.RemoveAsync(role);
-
-                return Unit.Value;
-            }
+            _roleRepository = roleRepository;
+        }
+        
+        public async Task Handle(DeleteRoleCommand request)
+        {
+            var role = await _roleRepository.FindOneAsync(request.Id);
+            await _roleRepository.RemoveAsync(role);
         }
     }
 }

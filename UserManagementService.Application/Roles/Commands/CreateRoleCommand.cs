@@ -1,30 +1,29 @@
-﻿using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using System.Threading.Tasks;
 using UserManagementService.Core.Entities;
 using UserManagementService.Core.Contracts;
+using UserManagementService.Application.Contracts;
 
 namespace UserManagementService.Application.Roles.Commands
 {
-    public partial class CreateRoleCommand : IRequest<long>
+    public partial class CreateRoleCommand
     {
         public string Name { get; set; }
+    }
 
-        public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, long>
+    public class CreateRoleCommandHandler : ICommandHandler<CreateRoleCommand, long>
+    {
+        private readonly IRoleRepository _roleRepository;
+
+        public CreateRoleCommandHandler(IRoleRepository roleRepository)
         {
-            private readonly IRoleRepository _roleRepository;
+            _roleRepository = roleRepository;
+        }
 
-            public CreateRoleCommandHandler(IRoleRepository roleRepository)
-            {
-                _roleRepository = roleRepository;
-            }
+        public Task<long> Handle(CreateRoleCommand request)
+        {
+            var role = new Role(request.Name);
 
-            public Task<long> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
-            {
-                var role = new Role(request.Name);
-
-                return _roleRepository.CreateAsync(role);
-            }
+            return _roleRepository.CreateAsync(role);
         }
     }
 }

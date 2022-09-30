@@ -1,50 +1,43 @@
-﻿using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using System.Threading.Tasks;
 using UserManagementService.Core.Entities;
 using UserManagementService.Core.Contracts;
+using UserManagementService.Application.Contracts;
 
 namespace UserManagementService.Application.Users.Commands
 {
-    public partial class CreateUserCommand : IRequest<long>
+    public class CreateUserCommand
     {
-        public string Email { get; set; }
-
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
-
         public string Name { get; set; }
 
         public string Surname { get; set; }
 
-        public string Patronymic { get; set; }
+        public string Email { get; set; }
+
+        public string Password { get; set; }
 
         public long RoleId { get; set; }
+    }
 
-        public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, long>
+    public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, long>
+    {
+        private readonly IUserRepository _userRepository;
+
+        public CreateUserCommandHandler(IUserRepository userRepository)
         {
-            private readonly IUserRepository _userRepository;
+            _userRepository = userRepository;
+        }
 
-            public CreateUserCommandHandler(IUserRepository userRepository)
-            {
-                _userRepository = userRepository;
-            }
+        public async Task<long> Handle(CreateUserCommand command)
+        {
+            var user = new User(
+                command.Name,
+                command.Surname,
+                command.Email,
+                command.Password,
+                command.RoleId
+                );
 
-            public async Task<long> Handle(CreateUserCommand request, CancellationToken cancellationToken)
-            {
-                var user = new User(
-                    request.UserName,
-                    request.Email,
-                    request.Password,
-                    request.Name,
-                    request.Surname,
-                    request.Patronymic,
-                    request.RoleId
-                    );
-
-                return await _userRepository.CreateAsync(user);
-            }
+            return await _userRepository.CreateAsync(user);
         }
     }
 }

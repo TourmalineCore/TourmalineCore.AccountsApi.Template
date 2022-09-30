@@ -1,44 +1,42 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using UserManagementService.Core.Interfaces;
+﻿using UserManagementService.Core.Interfaces;
 
 namespace UserManagementService.Core.Entities
 {
-    public class User : IdentityUser<long>, IIdentityEntity
+    public class User : IIdentityEntity
     {
+        public long Id { get; private set; }
+
         public string Name { get; private set; }
 
         public string Surname { get; private set; }
 
-        public string Patronymic { get; private set; }
+        public string Email { get; private set; }
 
-        public long? RoleId { get; private set; }
+        public string Password { get; private set; }
 
-        public Role? Role { get; private set; }
+        public long RoleId { get; private set; }
+
+        public Role Role { get; private set; }
 
         // For DB Context
         private User() { }
 
-        public User(string userName, string email, string password, string name, string surname, string patronymic, long roleId)
+        public User(string name, string surname, string email, string password, long roleId)
         {
-            UserName = userName;
-            Email = email;
-            
-            // ToDo add password hash
-            PasswordHash = password;
             Name = name;
             Surname = surname;
-            Patronymic = patronymic;
+            Email = email;
+
+            // ToDo add password hash
+            Password = password;
             RoleId = roleId;
         }
 
-        public void Update(string userName, string email, string name, string surname, string patronymic, long roleId)
+        public void Update(string name, string surname, string email, long roleId)
         {
-            UserName = userName;
-            Email = email;
             Name = name;
             Surname = surname;
-            Patronymic = patronymic;
+            Email = email;
             RoleId = roleId;
         }
 

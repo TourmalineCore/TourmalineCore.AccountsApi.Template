@@ -1,10 +1,22 @@
-﻿using Microsoft.AspNetCore.Identity;
-using UserManagementService.Core.Interfaces;
+﻿using UserManagementService.Core.Interfaces;
 
 namespace UserManagementService.Core.Entities
 {
-    public class Role : IdentityRole<long>, IIdentityEntity
+    public enum Roles
     {
+       Admin,
+       Employee,
+       Seo
+    }
+
+    public class Role : IIdentityEntity
+    {
+        public long Id { get; private set; }
+
+        public string Name { get; set; }
+        
+        public string NormalizedName { get; set; }
+
         private Role() { }
 
         public Role(string name)

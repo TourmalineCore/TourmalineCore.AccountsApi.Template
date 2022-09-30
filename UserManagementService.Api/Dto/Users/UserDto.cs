@@ -2,26 +2,23 @@
 {
     public class UserDto
     {
-        public long Id { get; set; }
+        public long Id { get; private set; }
 
-        public string Email { get; set; }
+        public string Name { get; private set; }
 
-        public string UserName { get; set; }
+        public string Surname { get; private set; }
 
-        public string Name { get; set; }
+        public string Email { get; private set; }
 
-        public string Surname { get; set; }
+        public long? RoleId { get; private set; }
 
-        public string Patronymic { get; set; }
-
-        public UserDto(long id, string userName, string email, string name, string surname, string patronymic)
+        public UserDto(long id, string name, string surname, string email, long? roleId)
         {
             Id = id;
-            UserName = userName;
-            Email = email;
             Name = name;
             Surname = surname;
-            Patronymic = patronymic;
+            Email = email;
+            RoleId = roleId;
         }
     }
 }
