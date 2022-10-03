@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using UserManagementService.Core.Entities;
 
 namespace UserManagementService.DataAccess
@@ -9,7 +9,7 @@ namespace UserManagementService.DataAccess
 
         public DbSet<Role> Roles { get; set; }
 
-        public UsersDbContext(DbContextOptions<UsersDbContext> options): base(options) 
+        public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)
         {
         }
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using UserManagementService.Core.Interfaces;
+using UserManagementService.Core.Entities;
 
 namespace UserManagementService.Core.Contracts
 {

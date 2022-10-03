@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using UserManagementService.Core.Interfaces;
+using UserManagementService.Core.Entities;
 
 namespace UserManagementService.DataAccess
 {

@@ -1,5 +1,3 @@
-﻿using UserManagementService.Core.Interfaces;
-
 namespace UserManagementService.Core.Entities
 {
     public class User : IIdentityEntity

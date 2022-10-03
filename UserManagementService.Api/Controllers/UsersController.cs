@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using UserManagementService.Api.Dto.Users;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;
@@ -40,10 +40,10 @@ namespace UserManagementService.Api.Controllers
                 x.Id,
                 x.Name,
                 x.Surname,
-                x.Email, 
+                x.Email,
                 x.RoleId
-                )
-            );
+              )
+          );
         }
 
         [HttpGet("find")]

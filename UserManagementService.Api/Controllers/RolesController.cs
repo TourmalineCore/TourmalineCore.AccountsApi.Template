@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using UserManagementService.Api.Dto.Roles;
 using UserManagementService.Application.Roles.Commands;
 using UserManagementService.Application.Roles.Queries;
@@ -19,11 +19,13 @@ namespace UserManagementService.Api.Controllers
         private readonly DeleteRoleCommandHandler _deleteRoleCommandHandler;
 
         public RolesController(
+            CreateRoleCommandHandler createRoleCommandHandler,
             GetRoleListQueryHandler getRoleListQueryHandler,
             GetRoleByIdQueryHandler getRoleByIdQueryHandler,
             UpdateRoleCommandHandler updateRoleCommandHandler,
             DeleteRoleCommandHandler deleteRoleCommandHandler)
         {
+            _createRoleCommandHandler = createRoleCommandHandler;
             _getRoleListQueryHandler = getRoleListQueryHandler;
             _getRoleByIdQueryHandler = getRoleByIdQueryHandler;
             _updateRoleCommandHandler = updateRoleCommandHandler;

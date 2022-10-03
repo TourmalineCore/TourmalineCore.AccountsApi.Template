@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using UserManagementService.Application.Contracts;
 using UserManagementService.Core.Contracts;
 

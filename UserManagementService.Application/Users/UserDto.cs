@@ -5,10 +5,10 @@ namespace UserManagementService.Application.Users
     public class UserDto
     {
         public UserDto(
-            long id, 
-            string name, 
-            string surname, 
-            string email, 
+            long id,
+            string name,
+            string surname,
+            string email,
             long roleId)
         {
             Id = id;

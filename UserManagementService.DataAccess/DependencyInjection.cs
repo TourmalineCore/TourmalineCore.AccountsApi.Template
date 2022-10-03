@@ -8,21 +8,21 @@ namespace UserManagementService.DataAccess
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration) 
-            {
-                var connectionString = configuration.GetConnectionString("DefaultConnection");
-                
-                services.AddDbContext<UsersDbContext>(options =>
-                {
-                    options.UseNpgsql(connectionString);
-                });
+        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-                services.AddScoped<UsersDbContext>();
+            services.AddDbContext<UsersDbContext>(options =>
+            {
+                options.UseNpgsql(connectionString);
+            });
+
+            services.AddScoped<UsersDbContext>();
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
-            
+
             return services;
-            }
         }
+    }
 }

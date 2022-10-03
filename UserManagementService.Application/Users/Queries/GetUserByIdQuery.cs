@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using UserManagementService.Core.Contracts;
 using UserManagementService.Application.Contracts;
+using UserManagementService.Core.Contracts;
 
 namespace UserManagementService.Application.Users.Queries
 {

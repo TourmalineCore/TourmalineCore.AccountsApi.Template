@@ -1,4 +1,4 @@
-﻿namespace UserManagementService.Core.Interfaces
+﻿namespace UserManagementService.Core.Entities
 {
     public interface IIdentityEntity
     {
