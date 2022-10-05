@@ -3,6 +3,8 @@ using UserManagementService.Core.Entities;
 
 namespace UserManagementService.DataAccess
 {
+    //Use next command in Package Manager Console to update Dev env DB
+    //PM> $env:ASPNETCORE_ENVIRONMENT = 'Debug'; Update-Database
     public class UsersDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }

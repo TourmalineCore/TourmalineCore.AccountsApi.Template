@@ -1,45 +1,16 @@
-using System;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Serilog;
-using Serilog.Events;
+using UserManagementService.Application;
 using UserManagementService.DataAccess;
 
-namespace UserManagementService.Api
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .CreateLogger();
+var builder = WebApplication.CreateBuilder(args);
 
-            var host = CreateHostBuilder(args).Build();
+builder.Services.AddApplication();
+builder.Services.AddPersistence(builder.Configuration);
 
-            using (var scope = host.Services.CreateScope())
-            {
-                var serviceProvider = scope.ServiceProvider;
-                try
-                {
-                    var context = serviceProvider.GetService<UsersDbContext>();
-                    DbInitializer.Initialize(context);
-                }
-                catch (Exception exception)
-                {
-                    Log.Fatal(exception, "An error occurred while app initialization");
-                }
-            }
+builder.Services.AddControllers();
 
-            host.Run();
-        }
+var app = builder.Build();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+var context = app.Services.GetService<UsersDbContext>();
+DbInitializer.Initialize(context);
+
+app.Run();
