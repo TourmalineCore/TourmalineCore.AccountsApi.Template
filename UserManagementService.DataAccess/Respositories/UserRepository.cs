@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserManagementService.Core.Contracts;
@@ -15,9 +15,11 @@ namespace UserManagementService.DataAccess.Respositories
             _usersDbContext = usersDbContext;
         }
 
-        public Task AddToRoleAsync(Role role)
+        public Task AddRoleAsync(User user, Role role)
         {
-            throw new System.NotImplementedException();
+            user.AddRole(role);
+            
+            return _usersDbContext.SaveChangesAsync();
         }
 
         public async Task<long> CreateAsync(User user)
@@ -31,7 +33,7 @@ namespace UserManagementService.DataAccess.Respositories
         public Task<User> FindOneAsync(long id)
         {
             return _usersDbContext
-                    .QueryableAsNoTracking<User>()
+                    .Queryable<User>()
                     .GetByIdAsync(id);
         }
 

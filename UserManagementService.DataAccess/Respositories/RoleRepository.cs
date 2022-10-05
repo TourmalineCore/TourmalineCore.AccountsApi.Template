@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserManagementService.Core.Contracts;
@@ -26,7 +26,7 @@ namespace UserManagementService.DataAccess.Respositories
         public Task<Role> FindOneAsync(long id)
         {
             return _usersDbContext
-                    .QueryableAsNoTracking<Role>()
+                    .Queryable<Role>()
                     .GetByIdAsync(id);
         }
 

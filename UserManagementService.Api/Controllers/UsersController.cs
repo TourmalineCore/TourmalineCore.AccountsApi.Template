@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UserManagementService.Api.Dto.Users;
 using UserManagementService.Application.Users.Commands;
@@ -16,19 +13,22 @@ namespace UserManagementService.Api.Controllers
         private readonly CreateUserCommandHandler _createUserCommandHandler;
         private readonly UpdateUserCommandHandler _updateUserCommandHandler;
         private readonly DeleteUserCommandHandler _deleteUserCommandHandler;
+        private readonly AddRoleToUserCommandHandler _addRoleToUserCommandHandler;
 
         public UsersController(
             GetUserListQueryHandler getUserListQueryHandler,
             GetUserByIdQueryHandler getUserByIdQueryHandler,
             CreateUserCommandHandler createUserCommandHandler,
             UpdateUserCommandHandler updateUserCommandHandler,
-            DeleteUserCommandHandler deleteUserCommandHandler)
+            DeleteUserCommandHandler deleteUserCommandHandler,
+            AddRoleToUserCommandHandler addRoleToUserCommandHandler)
         {
             _getUserListQueryHandler = getUserListQueryHandler;
             _getUserByIdQueryHandler = getUserByIdQueryHandler;
             _createUserCommandHandler = createUserCommandHandler;
             _updateUserCommandHandler = updateUserCommandHandler;
             _deleteUserCommandHandler = deleteUserCommandHandler;
+            _addRoleToUserCommandHandler = addRoleToUserCommandHandler;
         }
 
         [HttpGet("all")]
@@ -76,6 +76,12 @@ namespace UserManagementService.Api.Controllers
         public Task Delete([FromQuery] DeleteUserCommand deleteUserCommand)
         {
             return _deleteUserCommandHandler.Handle(deleteUserCommand);
+        }
+
+        [HttpPost("add-role")]
+        public Task AddRole([FromBody] AddRoleToUserCommand addRoleToUserCommand)
+        {
+            return _addRoleToUserCommandHandler.Handle(addRoleToUserCommand);
         }
     }
 }
