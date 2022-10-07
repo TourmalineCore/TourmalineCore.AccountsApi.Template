@@ -3,14 +3,27 @@ using UserManagementService.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApplication();
-builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddControllers();
+
+var configuration = builder.Configuration;
+var environment = builder.Environment;
 
 builder.Services.AddControllers();
 
+builder.Services.AddApplication();
+builder.Services.AddPersistence(configuration);
+
 var app = builder.Build();
 
-var context = app.Services.GetService<UsersDbContext>();
-DbInitializer.Initialize(context);
+if (environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app.UseRouting();
+
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+app.Run();
 
 app.Run();
