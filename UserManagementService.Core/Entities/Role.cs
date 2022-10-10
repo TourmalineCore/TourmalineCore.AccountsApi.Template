@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace UserManagementService.Core.Entities
 {
     public enum Roles
@@ -11,10 +13,13 @@ namespace UserManagementService.Core.Entities
     {
         public long Id { get; private set; }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public string NormalizedName { get; set; }
+        public string NormalizedName { get; private set; }
 
+        public List<RolePriveleges> RolePriveleges { get; private set; }
+
+        // For Db Context
         private Role() { }
 
         public Role(string name)

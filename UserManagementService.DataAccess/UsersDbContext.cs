@@ -11,6 +11,8 @@ namespace UserManagementService.DataAccess
 
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<Privilege> Privileges { get; set; }
+
         public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)
         {
         }
