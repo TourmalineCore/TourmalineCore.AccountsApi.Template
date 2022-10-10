@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserManagementService.Core.Entities;
 
@@ -7,8 +7,6 @@ namespace UserManagementService.Core.Contracts
     public interface IRepository<TEntity> where TEntity : IIdentityEntity
     {
         public Task<long> CreateAsync(TEntity role);
-
-        public Task<TEntity> FindOneAsync(long id);
 
         public Task<IEnumerable<TEntity>> GetAllAsync();
 

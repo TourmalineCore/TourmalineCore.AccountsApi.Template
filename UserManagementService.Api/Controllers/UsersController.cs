@@ -9,7 +9,7 @@ namespace UserManagementService.Api.Controllers
     public class UsersController : Controller
     {
         private readonly GetUserListQueryHandler _getUserListQueryHandler;
-        private readonly GetUserByIdQueryHandler _getUserByIdQueryHandler;
+        private readonly GetUserByEmailQueryHandler _getUserByIdQueryHandler;
         private readonly CreateUserCommandHandler _createUserCommandHandler;
         private readonly UpdateUserCommandHandler _updateUserCommandHandler;
         private readonly DeleteUserCommandHandler _deleteUserCommandHandler;
@@ -17,7 +17,7 @@ namespace UserManagementService.Api.Controllers
 
         public UsersController(
             GetUserListQueryHandler getUserListQueryHandler,
-            GetUserByIdQueryHandler getUserByIdQueryHandler,
+            GetUserByEmailQueryHandler getUserByIdQueryHandler,
             CreateUserCommandHandler createUserCommandHandler,
             UpdateUserCommandHandler updateUserCommandHandler,
             DeleteUserCommandHandler deleteUserCommandHandler,
@@ -32,22 +32,22 @@ namespace UserManagementService.Api.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IEnumerable<UserDto>> FindAll([FromQuery] GetUserListQuery getUserListQuery)
+        public async Task<IEnumerable<UserListItemDto>> FindAll([FromQuery] GetUserListQuery getUserListQuery)
         {
             var users = await _getUserListQueryHandler.Handle(getUserListQuery);
 
-            return users.Select(x => new UserDto(
+            return users.Select(x => new UserListItemDto(
                 x.Id,
                 x.Name,
                 x.Surname,
                 x.Email,
-                x.RoleId
+                x.RoleName
               )
           );
         }
 
         [HttpGet("find")]
-        public async Task<UserDto> FindById([FromQuery] GetUserByIdQuery getUserByIdQuery)
+        public async Task<UserDto> FindByEmail([FromQuery] GetUserByEmailQuery getUserByIdQuery)
         {
             var user = await _getUserByIdQueryHandler.Handle(getUserByIdQuery);
 
@@ -56,7 +56,8 @@ namespace UserManagementService.Api.Controllers
                 user.Name,
                 user.Surname,
                 user.Email,
-                user.RoleId
+                user.RoleName,
+                user.Privileges
                 );
         }
 

@@ -1,4 +1,6 @@
-﻿using UserManagementService.Core.Entities;
+using System.Collections.Generic;
+using System.Linq;
+using UserManagementService.Core.Entities;
 
 namespace UserManagementService.Application.Users
 {
@@ -9,13 +11,15 @@ namespace UserManagementService.Application.Users
             string name,
             string surname,
             string email,
-            long roleId)
+            string roleName,
+            IEnumerable<string> privileges)
         {
             Id = id;
             Name = name;
             Surname = surname;
             Email = email;
-            RoleId = roleId;
+            RoleName = roleName;
+            Privileges = privileges;
         }
 
         public long Id { get; private set; }
@@ -26,16 +30,21 @@ namespace UserManagementService.Application.Users
 
         public string Email { get; private set; }
 
-        public long RoleId { get; private set; }
+        public string RoleName { get; private set; }
+        
+        public IEnumerable<string> Privileges { get; private set; }
 
         public static UserDto MapFrom(User userEntity)
         {
+            var userPrivileges = userEntity.Role.RolePriveleges.Select(x => x.Privilege.Name).Select(n => n.ToString());
+
             return new UserDto(
                 userEntity.Id,
                 userEntity.Name,
                 userEntity.Surname,
                 userEntity.Email,
-                userEntity.RoleId
+                userEntity.Role.Name,
+                userPrivileges
                 );
         }
     }
