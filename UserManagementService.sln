@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagementService.Appli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagementService.DataAccess", "UserManagementService.DataAccess\UserManagementService.DataAccess.csproj", "{77486225-9D83-47DF-802B-86236D21F017}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementService.Api", "UserManagementService.Api\UserManagementService.Api.csproj", "{D2460A09-13E6-41B8-BDB4-B8DC6E352A48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagementService.Api", "UserManagementService.Api\UserManagementService.Api.csproj", "{D2460A09-13E6-41B8-BDB4-B8DC6E352A48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementService.Infrastructure.RabbitMq", "UserManagementService.Infrastructure.RabbitMq\UserManagementService.Infrastructure.RabbitMq.csproj", "{D7BF777A-B452-4711-B8EE-A3D7D4C98772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D2460A09-13E6-41B8-BDB4-B8DC6E352A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2460A09-13E6-41B8-BDB4-B8DC6E352A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2460A09-13E6-41B8-BDB4-B8DC6E352A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7BF777A-B452-4711-B8EE-A3D7D4C98772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7BF777A-B452-4711-B8EE-A3D7D4C98772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7BF777A-B452-4711-B8EE-A3D7D4C98772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7BF777A-B452-4711-B8EE-A3D7D4C98772}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
