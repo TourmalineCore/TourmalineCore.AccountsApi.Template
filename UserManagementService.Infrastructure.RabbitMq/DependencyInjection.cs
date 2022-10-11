@@ -4,9 +4,9 @@ using UserManagementService.Infrastructure.RabbitMq.Options;
 
 namespace UserManagementService.Infrastructure.RabbitMq;
 
-public class DependencyInjection
+public static class DependencyInjection
 {
-    public static IServiceCollection RegisterRabbitInfrastructure(IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterRabbitInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<RabbitMqProducer>();
         services.AddSingleton<RabbitMqResourceCreator>();
@@ -20,7 +20,7 @@ public class DependencyInjection
         return services;
     }
 
-    public static void RegisterRabbitResources(IServiceCollection services, IConfiguration configuration)
+    public static void RegisterRabbitResources(this IServiceCollection services, IConfiguration configuration)
     {
         var queueOptions = configuration.GetSection(nameof(QueueOptions)).Get<QueueOptions>();
         var dlxOptions = configuration.GetSection(nameof(DlxOptions)).Get<DlxOptions>();

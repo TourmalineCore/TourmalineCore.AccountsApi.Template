@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using UserManagementService.Api.Dto.Users;
+using UserManagementService.Application.Users;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;
+using UserDto = UserManagementService.Api.Dto.Users.UserDto;
 
 namespace UserManagementService.Api.Controllers
 {
@@ -10,25 +11,25 @@ namespace UserManagementService.Api.Controllers
     {
         private readonly GetUserListQueryHandler _getUserListQueryHandler;
         private readonly GetUserByIdQueryHandler _getUserByIdQueryHandler;
-        private readonly CreateUserCommandHandler _createUserCommandHandler;
         private readonly UpdateUserCommandHandler _updateUserCommandHandler;
         private readonly DeleteUserCommandHandler _deleteUserCommandHandler;
         private readonly AddRoleToUserCommandHandler _addRoleToUserCommandHandler;
+        private readonly CreatedUserHandler _createdUserHandler;
 
         public UsersController(
             GetUserListQueryHandler getUserListQueryHandler,
             GetUserByIdQueryHandler getUserByIdQueryHandler,
-            CreateUserCommandHandler createUserCommandHandler,
             UpdateUserCommandHandler updateUserCommandHandler,
             DeleteUserCommandHandler deleteUserCommandHandler,
-            AddRoleToUserCommandHandler addRoleToUserCommandHandler)
+            AddRoleToUserCommandHandler addRoleToUserCommandHandler,
+            CreatedUserHandler createdUserHandler)
         {
             _getUserListQueryHandler = getUserListQueryHandler;
             _getUserByIdQueryHandler = getUserByIdQueryHandler;
-            _createUserCommandHandler = createUserCommandHandler;
             _updateUserCommandHandler = updateUserCommandHandler;
             _deleteUserCommandHandler = deleteUserCommandHandler;
             _addRoleToUserCommandHandler = addRoleToUserCommandHandler;
+            _createdUserHandler = createdUserHandler;
         }
 
         [HttpGet("all")]
@@ -63,7 +64,7 @@ namespace UserManagementService.Api.Controllers
         [HttpPost("create")]
         public async Task<long> Create([FromBody] CreateUserCommand createUserCommand)
         {
-            return await _createUserCommandHandler.Handle(createUserCommand);
+            return await _createdUserHandler.HandleNewUser(createUserCommand);
         }
 
         [HttpPut("update")]

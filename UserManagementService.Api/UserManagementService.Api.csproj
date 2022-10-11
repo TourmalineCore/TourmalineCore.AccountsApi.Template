@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UserManagementService.Application\UserManagementService.Application.csproj" />
+    <ProjectReference Include="..\UserManagementService.Infrastructure.RabbitMq\UserManagementService.Infrastructure.RabbitMq.csproj" />
   </ItemGroup>
 
 </Project>

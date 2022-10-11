@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,16 @@
   <ItemGroup>
     <ProjectReference Include="..\UserManagementService.Core\UserManagementService.Core.csproj" />
     <ProjectReference Include="..\UserManagementService.DataAccess\UserManagementService.DataAccess.csproj" />
+    <ProjectReference Include="..\UserManagementService.Infrastructure.RabbitMq\UserManagementService.Infrastructure.RabbitMq.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RabbitMq\Producers\" />
+    <Folder Include="RabbitMq\Messages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Utf8Json" Version="1.3.7" />
   </ItemGroup>
 
 </Project>
