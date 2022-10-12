@@ -22,6 +22,20 @@ namespace UserManagementService.Application.Users
             Privileges = privileges;
         }
 
+        public UserDto(
+            long id,
+            string name,
+            string surname,
+            string email,
+            string roleName)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            Email = email;
+            RoleName = roleName;
+        }
+
         public long Id { get; private set; }
 
         public string Name { get; private set; }

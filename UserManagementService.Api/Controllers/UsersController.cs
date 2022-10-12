@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using UserManagementService.Api.Dto.Users;
+using UserManagementService.Application.Users;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;
 
@@ -32,39 +32,21 @@ namespace UserManagementService.Api.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IEnumerable<UserListItemDto>> FindAll([FromQuery] GetUserListQuery getUserListQuery)
+        public Task<IEnumerable<UserDto>> FindAll([FromQuery] GetUserListQuery getUserListQuery)
         {
-            var users = await _getUserListQueryHandler.Handle(getUserListQuery);
-
-            return users.Select(x => new UserListItemDto(
-                x.Id,
-                x.Name,
-                x.Surname,
-                x.Email,
-                x.RoleName
-              )
-          );
+            return _getUserListQueryHandler.Handle(getUserListQuery);
         }
 
         [HttpGet("find")]
-        public async Task<UserDto> FindByEmail([FromQuery] GetUserByEmailQuery getUserByIdQuery)
+        public Task<UserDto> FindByEmail([FromQuery] GetUserByEmailQuery getUserByIdQuery)
         {
-            var user = await _getUserByIdQueryHandler.Handle(getUserByIdQuery);
-
-            return new UserDto(
-                user.Id,
-                user.Name,
-                user.Surname,
-                user.Email,
-                user.RoleName,
-                user.Privileges
-                );
+            return _getUserByIdQueryHandler.Handle(getUserByIdQuery);
         }
 
         [HttpPost("create")]
-        public async Task<long> Create([FromBody] CreateUserCommand createUserCommand)
+        public Task<long> Create([FromBody] CreateUserCommand createUserCommand)
         {
-            return await _createUserCommandHandler.Handle(createUserCommand);
+            return _createUserCommandHandler.Handle(createUserCommand);
         }
 
         [HttpPut("update")]
