@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 using UserManagementService.Application.Users;
 using UserManagementService.Application.Users.Commands;
@@ -41,14 +40,14 @@ namespace UserManagementService.Api.Controllers
             return _getUserListQueryHandler.Handle(getUserListQuery);
         }
 
-        [HttpGet("find")]
-        public Task<UserDto> FindByEmail([FromQuery] GetUserByEmailQuery getUserByEmailQuery)
+        [HttpGet("findByEmail/{email}")]
+        public Task<UserDto> FindByEmail([FromRoute] GetUserByEmailQuery getUserByEmailQuery)
         {
             return _getUserByEmailQueryHandler.Handle(getUserByEmailQuery);
         }
 
-        [HttpGet("find")]
-        public Task<UserDto> FindById([FromQuery] GetUserByIdQuery getUserByIdQuery)
+        [HttpGet("findById/{id}")]
+        public Task<UserDto> FindById([FromRoute] GetUserByIdQuery getUserByIdQuery)
         {
             return _getUserByIdQueryHandler.Handle(getUserByIdQuery);
         }
