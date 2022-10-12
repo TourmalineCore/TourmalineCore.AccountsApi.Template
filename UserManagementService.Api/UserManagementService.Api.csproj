@@ -23,4 +23,8 @@
     <ProjectReference Include="..\UserManagementService.Application\UserManagementService.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dto\Users\" />
+  </ItemGroup>
+
 </Project>

@@ -26,8 +26,8 @@ namespace UserManagementService.Application.Users.Commands
 
         public async Task Handle(AddRoleToUserCommand command)
         {
-            var user = await _userRepository.FindOneAsync(command.UserId);
-            var role = await _roleRepository.FindOneAsync(command.RoleId);
+            var user = await _userRepository.FindByIdAsync(command.UserId);
+            var role = await _roleRepository.FindByIdAsync(command.RoleId);
 
             await _userRepository.AddRoleAsync(user, role);
         }

@@ -30,7 +30,16 @@ namespace UserManagementService.DataAccess.Respositories
             return user.Id;
         }
 
-        public Task<User> FindOneAsync(long id)
+        public Task<User?> FindByEmailAsync(string email)
+        {
+            return _usersDbContext
+                    .Queryable<User>()
+                    .Include(x => x.Role)
+                    .ThenInclude(x => x.RolePriveleges)
+                    .SingleOrDefaultAsync(x => x.Email == email);
+        }
+
+        public Task<User> FindByIdAsync(long id)
         {
             return _usersDbContext
                     .Queryable<User>()

@@ -23,6 +23,13 @@ namespace UserManagementService.DataAccess.Respositories
             return role.Id;
         }
 
+        public Task<Role> FindByIdAsync(long id)
+        {
+            return _usersDbContext
+                    .Queryable<Role>()
+                    .GetByIdAsync(id);
+        }
+
         public Task<Role> FindOneAsync(long id)
         {
             return _usersDbContext

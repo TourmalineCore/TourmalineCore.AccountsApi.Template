@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserManagementService.Application.Contracts;
@@ -22,13 +22,12 @@ namespace UserManagementService.Application.Users.Queries
         public async Task<IEnumerable<UserDto>> Handle(GetUserListQuery request)
         {
             var userEntities = await _userRepository.GetAllAsync();
-
             return userEntities.Select(x => new UserDto(
                 x.Id,
                 x.Name,
                 x.Surname,
                 x.Email,
-                x.RoleId
+                x.Role.Name
                 )
             );
         }

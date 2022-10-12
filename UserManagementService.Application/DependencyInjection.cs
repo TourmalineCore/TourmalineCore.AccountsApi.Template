@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using UserManagementService.Application.Roles.Commands;
 using UserManagementService.Application.Roles.Queries;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;
@@ -15,14 +14,9 @@ namespace UserManagementService.Application
             services.AddTransient<DeleteUserCommandHandler>();
             services.AddTransient<AddRoleToUserCommandHandler>();
 
-            services.AddTransient<CreateRoleCommandHandler>();
-            services.AddTransient<UpdateRoleCommandHandler>();
-            services.AddTransient<DeleteRoleCommandHandler>();
-
-            services.AddTransient<GetUserByIdQueryHandler>();
+            services.AddTransient<GetUserByEmailQueryHandler>();
             services.AddTransient<GetUserListQueryHandler>();
 
-            services.AddTransient<GetRoleListQueryHandler>();
             services.AddTransient<GetRoleListQueryHandler>();
 
             return services;

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using UserManagementService.Api.Dto.Users;
+using UserManagementService.Application.Users;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;
 
@@ -9,7 +9,7 @@ namespace UserManagementService.Api.Controllers
     public class UsersController : Controller
     {
         private readonly GetUserListQueryHandler _getUserListQueryHandler;
-        private readonly GetUserByIdQueryHandler _getUserByIdQueryHandler;
+        private readonly GetUserByEmailQueryHandler _getUserByIdQueryHandler;
         private readonly CreateUserCommandHandler _createUserCommandHandler;
         private readonly UpdateUserCommandHandler _updateUserCommandHandler;
         private readonly DeleteUserCommandHandler _deleteUserCommandHandler;
@@ -17,7 +17,7 @@ namespace UserManagementService.Api.Controllers
 
         public UsersController(
             GetUserListQueryHandler getUserListQueryHandler,
-            GetUserByIdQueryHandler getUserByIdQueryHandler,
+            GetUserByEmailQueryHandler getUserByIdQueryHandler,
             CreateUserCommandHandler createUserCommandHandler,
             UpdateUserCommandHandler updateUserCommandHandler,
             DeleteUserCommandHandler deleteUserCommandHandler,
@@ -32,38 +32,21 @@ namespace UserManagementService.Api.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IEnumerable<UserDto>> FindAll([FromQuery] GetUserListQuery getUserListQuery)
+        public Task<IEnumerable<UserDto>> FindAll([FromQuery] GetUserListQuery getUserListQuery)
         {
-            var users = await _getUserListQueryHandler.Handle(getUserListQuery);
-
-            return users.Select(x => new UserDto(
-                x.Id,
-                x.Name,
-                x.Surname,
-                x.Email,
-                x.RoleId
-              )
-          );
+            return _getUserListQueryHandler.Handle(getUserListQuery);
         }
 
         [HttpGet("find")]
-        public async Task<UserDto> FindById([FromQuery] GetUserByIdQuery getUserByIdQuery)
+        public Task<UserDto> FindByEmail([FromQuery] GetUserByEmailQuery getUserByEmailQuery)
         {
-            var user = await _getUserByIdQueryHandler.Handle(getUserByIdQuery);
-
-            return new UserDto(
-                user.Id,
-                user.Name,
-                user.Surname,
-                user.Email,
-                user.RoleId
-                );
+            return _getUserByIdQueryHandler.Handle(getUserByEmailQuery);
         }
 
         [HttpPost("create")]
-        public async Task<long> Create([FromBody] CreateUserCommand createUserCommand)
+        public Task<long> Create([FromBody] CreateUserCommand createUserCommand)
         {
-            return await _createUserCommandHandler.Handle(createUserCommand);
+            return _createUserCommandHandler.Handle(createUserCommand);
         }
 
         [HttpPut("update")]
