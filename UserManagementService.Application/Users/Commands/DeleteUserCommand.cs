@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using UserManagementService.Application.Contracts;
 using UserManagementService.Core.Contracts;
 
@@ -20,7 +20,7 @@ namespace UserManagementService.Application.Users.Commands
 
         public async Task Handle(DeleteUserCommand request)
         {
-            var user = await _userRepository.FindOneAsync(request.Id);
+            var user = await _userRepository.FindByIdAsync(request.Id);
 
             await _userRepository.RemoveAsync(user);
         }

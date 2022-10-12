@@ -22,15 +22,12 @@ namespace UserManagementService.Application.Users.Queries
         public async Task<IEnumerable<UserDto>> Handle(GetUserListQuery request)
         {
             var userEntities = await _userRepository.GetAllAsync();
-
-            // ToDo #313fz56
             return userEntities.Select(x => new UserDto(
                 x.Id,
                 x.Name,
                 x.Surname,
                 x.Email,
-                x.Role.Name,
-                new List<string>()
+                x.Role.Name
                 )
             );
         }

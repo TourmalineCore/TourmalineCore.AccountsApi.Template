@@ -30,8 +30,8 @@ namespace UserManagementService.Application.Users.Commands
 
         public async Task Handle(UpdateUserCommand request)
         {
-            // ToDo #313fz74
-            var user = await _userRepository.FindOneAsync(request.Id);
+            
+            var user = await _userRepository.FindByIdAsync(request.Id);
 
             user.Update(
                 request.Name,

@@ -8,6 +8,8 @@ namespace UserManagementService.Core.Contracts
     {
         public Task<long> CreateAsync(TEntity role);
 
+        public Task<TEntity> FindByIdAsync(long id);
+
         public Task<IEnumerable<TEntity>> GetAllAsync();
 
         public Task RemoveAsync(TEntity entity);

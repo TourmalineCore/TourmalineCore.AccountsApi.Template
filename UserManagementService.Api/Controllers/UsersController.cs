@@ -38,9 +38,9 @@ namespace UserManagementService.Api.Controllers
         }
 
         [HttpGet("find")]
-        public Task<UserDto> FindByEmail([FromQuery] GetUserByEmailQuery getUserByIdQuery)
+        public Task<UserDto> FindByEmail([FromQuery] GetUserByEmailQuery getUserByEmailQuery)
         {
-            return _getUserByIdQueryHandler.Handle(getUserByIdQuery);
+            return _getUserByIdQueryHandler.Handle(getUserByEmailQuery);
         }
 
         [HttpPost("create")]
