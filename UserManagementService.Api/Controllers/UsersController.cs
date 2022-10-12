@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 using UserManagementService.Application.Users;
 using UserManagementService.Application.Users.Commands;
@@ -9,7 +10,8 @@ namespace UserManagementService.Api.Controllers
     public class UsersController : Controller
     {
         private readonly GetUserListQueryHandler _getUserListQueryHandler;
-        private readonly GetUserByEmailQueryHandler _getUserByIdQueryHandler;
+        private readonly GetUserByEmailQueryHandler _getUserByEmailQueryHandler;
+        private readonly GetUserByIdQueryHandler _getUserByIdQueryHandler;
         private readonly CreateUserCommandHandler _createUserCommandHandler;
         private readonly UpdateUserCommandHandler _updateUserCommandHandler;
         private readonly DeleteUserCommandHandler _deleteUserCommandHandler;
@@ -17,18 +19,20 @@ namespace UserManagementService.Api.Controllers
 
         public UsersController(
             GetUserListQueryHandler getUserListQueryHandler,
-            GetUserByEmailQueryHandler getUserByIdQueryHandler,
+            GetUserByEmailQueryHandler getUserByEmailQueryHandler,
             CreateUserCommandHandler createUserCommandHandler,
             UpdateUserCommandHandler updateUserCommandHandler,
             DeleteUserCommandHandler deleteUserCommandHandler,
-            AddRoleToUserCommandHandler addRoleToUserCommandHandler)
+            AddRoleToUserCommandHandler addRoleToUserCommandHandler,
+            GetUserByIdQueryHandler getUserByIdQueryHandler)
         {
             _getUserListQueryHandler = getUserListQueryHandler;
-            _getUserByIdQueryHandler = getUserByIdQueryHandler;
+            _getUserByEmailQueryHandler = getUserByEmailQueryHandler;
             _createUserCommandHandler = createUserCommandHandler;
             _updateUserCommandHandler = updateUserCommandHandler;
             _deleteUserCommandHandler = deleteUserCommandHandler;
             _addRoleToUserCommandHandler = addRoleToUserCommandHandler;
+            _getUserByIdQueryHandler = getUserByIdQueryHandler;
         }
 
         [HttpGet("all")]
@@ -40,7 +44,13 @@ namespace UserManagementService.Api.Controllers
         [HttpGet("find")]
         public Task<UserDto> FindByEmail([FromQuery] GetUserByEmailQuery getUserByEmailQuery)
         {
-            return _getUserByIdQueryHandler.Handle(getUserByEmailQuery);
+            return _getUserByEmailQueryHandler.Handle(getUserByEmailQuery);
+        }
+
+        [HttpGet("find")]
+        public Task<UserDto> FindById([FromQuery] GetUserByIdQuery getUserByIdQuery)
+        {
+            return _getUserByIdQueryHandler.Handle(getUserByIdQuery);
         }
 
         [HttpPost("create")]

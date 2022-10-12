@@ -16,6 +16,7 @@ namespace UserManagementService.Application
 
             services.AddTransient<GetUserByEmailQueryHandler>();
             services.AddTransient<GetUserListQueryHandler>();
+            services.AddTransient<GetUserByIdQueryHandler>();
 
             services.AddTransient<GetRoleListQueryHandler>();
 
