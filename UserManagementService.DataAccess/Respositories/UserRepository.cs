@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UserManagementService.Core.Contracts;
 using UserManagementService.Core.Entities;
@@ -35,7 +36,7 @@ namespace UserManagementService.DataAccess.Respositories
             return _usersDbContext
                     .Queryable<User>()
                     .Include(x => x.Role)
-                    .ThenInclude(x => x.RolePriveleges)
+                    .ThenInclude(x => x.Privileges)
                     .SingleOrDefaultAsync(x => x.Email == email);
         }
 
@@ -43,6 +44,8 @@ namespace UserManagementService.DataAccess.Respositories
         {
             return _usersDbContext
                     .Queryable<User>()
+                    .Include(x => x.Role)
+                    .ThenInclude(x => x.Privileges)
                     .GetByIdAsync(id);
         }
 

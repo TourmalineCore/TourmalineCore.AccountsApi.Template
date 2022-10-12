@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UserManagementService.Application.Contracts;
 using UserManagementService.Core.Contracts;
@@ -24,16 +21,9 @@ namespace UserManagementService.Application.Users.Queries
         public async Task<UserDto> Handle(GetUserByIdQuery request)
         {
             var userEntity = await _userRepository.FindByIdAsync(request.Id);
-            var userPrivileges = userEntity.Role.RolePriveleges.Select(x => x.Privilege.Name).Select(n => n.ToString());
+            var userPrivileges = userEntity.Role.Privileges.Select(x => x.Name).Select(n => n.ToString());
 
-            return new UserDto(
-                userEntity.Id,
-                userEntity.Name,
-                userEntity.Surname,
-                userEntity.Email,
-                userEntity.Role.Name,
-                userPrivileges
-                );
+            return new UserDto(userEntity.Id, userEntity.Name, userEntity.Surname, userEntity.Email ,userEntity.Role.Name, userPrivileges);
         }
     }
 }

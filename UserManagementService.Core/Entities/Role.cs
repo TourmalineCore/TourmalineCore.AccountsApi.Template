@@ -17,7 +17,7 @@ namespace UserManagementService.Core.Entities
 
         public string NormalizedName { get; private set; }
 
-        public List<RolePriveleges> RolePriveleges { get; private set; }
+        public List<Privilege> Privileges { get; private set; }
 
         // For Db Context
         private Role() { }
