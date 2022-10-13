@@ -40,13 +40,13 @@ namespace UserManagementService.Api.Controllers
             return _getUserListQueryHandler.Handle(getUserListQuery);
         }
 
-        [HttpGet("findByEmail/{email}")]
+        [HttpGet("findByEmail/{Email}")]
         public Task<UserDto> FindByEmail([FromRoute] GetUserByEmailQuery getUserByEmailQuery)
         {
             return _getUserByEmailQueryHandler.Handle(getUserByEmailQuery);
         }
 
-        [HttpGet("findById/{id}")]
+        [HttpGet("findById/{Id}")]
         public Task<UserDto> FindById([FromRoute] GetUserByIdQuery getUserByIdQuery)
         {
             return _getUserByIdQueryHandler.Handle(getUserByIdQuery);
