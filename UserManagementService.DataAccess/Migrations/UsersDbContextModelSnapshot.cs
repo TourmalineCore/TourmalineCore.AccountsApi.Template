@@ -90,10 +90,6 @@ namespace UserManagementService.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
 

@@ -9,7 +9,7 @@ namespace UserManagementService.DataAccess.Mapping
         public void Configure(EntityTypeBuilder<Privilege> builder)
         {
             builder.Property(x => x.Name)
-                .HasConversion<string>();
+                   .HasConversion<string>();
         }
     }
 }
