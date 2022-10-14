@@ -33,7 +33,6 @@ namespace UserManagementService.Application.Users.Commands
                 command.Name,
                 command.Surname,
                 command.Email,
-                command.Password,
                 command.RoleId
                 );
 
