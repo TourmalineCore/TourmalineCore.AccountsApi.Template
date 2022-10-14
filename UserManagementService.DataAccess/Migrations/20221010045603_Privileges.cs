@@ -80,17 +80,6 @@ namespace UserManagementService.DataAccess.Migrations
                 principalTable: "Roles",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
-
-
-            migrationBuilder.InsertData(
-              table: "Privileges",
-              columns: new[] { "Id", "Name" },
-              values: new object[,]
-              {
-                    { 1L, $"{PrivilegesNames.CanManageUsers}" },
-                    { 2L, $"{PrivilegesNames.CanManageSalary}" },
-                    { 3L, $"{PrivilegesNames.CanManageRoles}" },
-              });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

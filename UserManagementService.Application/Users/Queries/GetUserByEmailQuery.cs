@@ -24,7 +24,7 @@ namespace UserManagementService.Application.Users.Queries
             var userEntity = await _userRepository.FindByEmailAsync(request.Email);
             var userPrivileges = userEntity.Role.Privileges.Select(x => x.Name).Select(n => n.ToString());
 
-            return new UserDto(userEntity.Id, userEntity.Name, userEntity.Surname, userEntity.Email, userEntity.Role.Name, userPrivileges);
+            return new UserDto(userEntity.Id, userEntity.Name, userEntity.Surname, userEntity.Email, userEntity.Role.Name.ToString(), userPrivileges);
         }
     }
 }

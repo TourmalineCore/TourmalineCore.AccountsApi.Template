@@ -27,7 +27,7 @@ namespace UserManagementService.Application.Users.Queries
                 x.Name,
                 x.Surname,
                 x.Email,
-                x.Role.Name
+                x.Role.Name.ToString()
                 )
             );
         }

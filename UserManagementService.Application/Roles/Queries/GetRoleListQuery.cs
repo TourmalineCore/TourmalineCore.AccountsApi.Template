@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserManagementService.Application.Contracts;
@@ -23,7 +23,7 @@ namespace UserManagementService.Application.Roles.Queries
         {
             var roleEntities = await _roleRepository.GetAllAsync();
 
-            return roleEntities.Select(x => new RoleDto(x.Id, x.Name));
+            return roleEntities.Select(x => new RoleDto(x.Id, x.Name.ToString()));
         }
     }
 }

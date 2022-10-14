@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using UserManagementService.Core.Entities;
 
@@ -44,16 +44,6 @@ namespace UserManagementService.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.InsertData(
-               table: "Roles",
-               columns: new[] { "Id", "Name", "NormalizedName" },
-               values: new object[,]
-               {
-                    { 1L, $"{Roles.Admin}", "admin" },
-                    { 2L, $"{Roles.Employee}", "employee" },
-                    { 3L, $"{Roles.Seo}", "seo" },
-               });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",

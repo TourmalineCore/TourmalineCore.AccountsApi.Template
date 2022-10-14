@@ -10,6 +10,10 @@ namespace UserManagementService.DataAccess.Mapping
         {
             builder.Property(x => x.Name)
                 .HasConversion<string>();
+
+            builder.HasData(new Privilege(1, PrivilegesNames.CanManageEverything),
+                            new Privilege(2, PrivilegesNames.CanViewEmployeeList),
+                            new Privilege(3, PrivilegesNames.CanViewEmployeePage));
         }
     }
 }

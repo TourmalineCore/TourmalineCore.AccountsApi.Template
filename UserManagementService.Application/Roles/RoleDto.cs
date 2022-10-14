@@ -1,4 +1,4 @@
-﻿using UserManagementService.Core.Entities;
+using UserManagementService.Core.Entities;
 
 namespace UserManagementService.Application.Roles
 {
@@ -16,7 +16,7 @@ namespace UserManagementService.Application.Roles
 
         public static RoleDto MapFrom(Role roleEntity)
         {
-            return new RoleDto(roleEntity.Id, roleEntity.Name);
+            return new RoleDto(roleEntity.Id, roleEntity.Name.ToString());
         }
     }
 }
