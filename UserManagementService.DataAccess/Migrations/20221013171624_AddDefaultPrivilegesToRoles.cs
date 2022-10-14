@@ -15,8 +15,8 @@ namespace UserManagementService.DataAccess.Migrations
               values: new object[,]
               {
                     { 1L, 1L },
-                    { 2L, 1L },
-                    { 3L, 1L },
+                    { 2L, 3L },
+                    { 3L, 2L },
               });
         }
 
