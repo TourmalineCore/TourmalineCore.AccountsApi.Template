@@ -4,9 +4,9 @@ namespace UserManagementService.Core.Entities;
 
 public enum PrivilegesNames
 {
-    CanManageUsers = 1,
-    CanManageRoles,
-    CanManageSalary
+    CanManageEverything = 1,
+    CanViewEmployeeList,
+    CanViewEmployeePage
 }
 
 public class Privilege : IIdentityEntity

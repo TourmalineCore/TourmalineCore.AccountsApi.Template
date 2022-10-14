@@ -37,7 +37,7 @@ namespace UserManagementService.DataAccess.Respositories
                     .Queryable<User>()
                     .Include(x => x.Role)
                     .ThenInclude(x => x.Privileges)
-                    .SingleOrDefaultAsync(x => x.Email == email);
+                    .SingleOrDefaultAsync(x => x.Email.Equals(email));
         }
 
         public Task<User> FindByIdAsync(long id)
@@ -53,6 +53,8 @@ namespace UserManagementService.DataAccess.Respositories
         {
             return await _usersDbContext
                 .QueryableAsNoTracking<User>()
+                .Include(x => x.Role)
+                .ThenInclude(x => x.Privileges)
                 .ToListAsync();
         }
 

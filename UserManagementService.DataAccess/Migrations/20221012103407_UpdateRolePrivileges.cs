@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using UserManagementService.Core.Entities;
 
 #nullable disable
 
@@ -53,6 +54,7 @@ namespace UserManagementService.DataAccess.Migrations
                 name: "IX_RolePrivileges_RolesId",
                 table: "RolePrivileges",
                 column: "RolesId");
+            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

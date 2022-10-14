@@ -87,9 +87,9 @@ namespace UserManagementService.DataAccess.Migrations
               columns: new[] { "Id", "Name" },
               values: new object[,]
               {
-                    { 1L, $"{PrivilegesNames.CanManageUsers}" },
-                    { 2L, $"{PrivilegesNames.CanManageSalary}" },
-                    { 3L, $"{PrivilegesNames.CanManageRoles}" },
+                    { 1L, $"{PrivilegesNames.CanManageEverything}" },
+                    { 2L, $"{PrivilegesNames.CanViewEmployeeList}" },
+                    { 3L, $"{PrivilegesNames.CanViewEmployeePage}" },
               });
         }
 
