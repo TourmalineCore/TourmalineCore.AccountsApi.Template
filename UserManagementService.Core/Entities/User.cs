@@ -10,8 +10,6 @@ namespace UserManagementService.Core.Entities
 
         public string Email { get; private set; }
 
-        public string Password { get; private set; }
-
         public long RoleId { get; private set; }
 
         public Role Role { get; private set; }
@@ -19,25 +17,23 @@ namespace UserManagementService.Core.Entities
         // For DB Context
         private User() { }
 
-        public User(string name, string surname, string email, string password, long roleId)
+        public User(string name, string surname, string email, long roleId)
         {
             Name = name;
             Surname = surname;
             Email = email;
 
             // ToDo add password hash
-            Password = password;
             RoleId = roleId;
         }
 
-        public void Update(string name, string surname, string email, string password, long roleId)
+        public void Update(string name, string surname, string email, long roleId)
         {
             Name = name;
             Surname = surname;
             Email = email;
 
             // ToDo add password hash
-            Password = password;
             RoleId = roleId;
         }
 

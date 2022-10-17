@@ -14,8 +14,6 @@ namespace UserManagementService.Application.Users.Commands
         
         public string Email { get; set; }
 
-        public string Password { get; set; }
-
         public long RoleId { get; set; }
     }
 
@@ -37,7 +35,6 @@ namespace UserManagementService.Application.Users.Commands
                 request.Name,
                 request.Surname,
                 request.Email,
-                request.Password,
                 request.RoleId
             );
 
