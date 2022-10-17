@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace UserManagementService.Core.Entities
 {
-    public enum Roles
+    public enum RoleNames
     {
         Admin,
         Employee,
@@ -13,7 +13,7 @@ namespace UserManagementService.Core.Entities
     {
         public long Id { get; private set; }
 
-        public string Name { get; private set; }
+        public RoleNames Name { get; private set; }
 
         public string NormalizedName { get; private set; }
 
@@ -22,16 +22,23 @@ namespace UserManagementService.Core.Entities
         // For Db Context
         private Role() { }
 
-        public Role(string name)
+        public Role(RoleNames name)
         {
             Name = name;
-            NormalizedName = name.Normalize();
+            NormalizedName = name.ToString().Normalize();
         }
 
-        public void Update(string name)
+        public Role(long id, RoleNames name)
+        {
+            Id = id;
+            Name = name;
+            NormalizedName = name.ToString().Normalize();
+        }
+
+        public void Update(RoleNames name)
         {
             Name = name;
-            NormalizedName = name.Normalize();
+            NormalizedName = name.ToString().Normalize();
         }
     }
 }

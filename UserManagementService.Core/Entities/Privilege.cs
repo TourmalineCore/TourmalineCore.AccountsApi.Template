@@ -4,9 +4,9 @@ namespace UserManagementService.Core.Entities;
 
 public enum PrivilegesNames
 {
-    CanManageUsers = 1,
-    CanManageRoles,
-    CanManageSalary
+    CanManageEverything = 1,
+    CanViewEmployeeList,
+    CanViewEmployeePage
 }
 
 public class Privilege : IIdentityEntity
@@ -20,5 +20,10 @@ public class Privilege : IIdentityEntity
     // To Db Context
     private Privilege()
     {
+    }
+    public Privilege(long id, PrivilegesNames name)
+    {
+        Id = id;
+        Name = name;
     }
 }

@@ -11,8 +11,8 @@ using UserManagementService.DataAccess;
 namespace UserManagementService.DataAccess.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20221013102250_RemovePasswordColumnFromUser")]
-    partial class RemovePasswordColumnFromUser
+    [Migration("20221017145603_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,23 @@ namespace UserManagementService.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Privilege");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "CanManageEverything"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Name = "CanViewEmployeeList"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Name = "CanViewEmployeePage"
+                        });
                 });
 
             modelBuilder.Entity("UserManagementService.Core.Entities.Role", b =>
@@ -74,6 +91,26 @@ namespace UserManagementService.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Name = "Seo",
+                            NormalizedName = "Seo"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Name = "Employee",
+                            NormalizedName = "Employee"
+                        });
                 });
 
             modelBuilder.Entity("UserManagementService.Core.Entities.User", b =>

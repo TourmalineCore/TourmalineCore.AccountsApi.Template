@@ -9,7 +9,11 @@ namespace UserManagementService.DataAccess.Mapping
         public void Configure(EntityTypeBuilder<Privilege> builder)
         {
             builder.Property(x => x.Name)
-                   .HasConversion<string>();
+                .HasConversion<string>();
+
+            builder.HasData(new Privilege(1, PrivilegesNames.CanManageEverything),
+                            new Privilege(2, PrivilegesNames.CanViewEmployeeList),
+                            new Privilege(3, PrivilegesNames.CanViewEmployeePage));
         }
     }
 }

@@ -11,6 +11,13 @@ namespace UserManagementService.DataAccess.Mapping
             builder.HasMany(p => p.Privileges)
                 .WithMany(p => p.Roles)
                 .UsingEntity(j => j.ToTable("RolePrivileges"));
+
+            builder.Property(x => x.Name)
+                .HasConversion<string>();
+
+            builder.HasData(new Role(1, RoleNames.Admin), 
+                            new Role(2, RoleNames.Seo), 
+                            new Role(3, RoleNames.Employee));
         }
     }
 }
