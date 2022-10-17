@@ -17,7 +17,13 @@ namespace UserManagementService.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(user => user.Email)
+                .IsUnique();
+            
             base.OnModelCreating(modelBuilder);
         }
     }
