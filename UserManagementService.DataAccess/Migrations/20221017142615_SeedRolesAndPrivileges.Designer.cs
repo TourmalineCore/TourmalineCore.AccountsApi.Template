@@ -11,8 +11,8 @@ using UserManagementService.DataAccess;
 namespace UserManagementService.DataAccess.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20221014144010_SeedRoleAndPrivileges")]
-    partial class SeedRoleAndPrivileges
+    [Migration("20221017142615_SeedRolesAndPrivileges")]
+    partial class SeedRolesAndPrivileges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
