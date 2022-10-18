@@ -19,10 +19,6 @@ namespace UserManagementService.DataAccess
         {
 
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
-
-            modelBuilder.Entity<User>()
-                .HasIndex(user => user.Email)
-                .IsUnique();
             
             base.OnModelCreating(modelBuilder);
         }
