@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using UserManagementService.Application.Contracts;
 using UserManagementService.Core.Contracts;
+using NodaTime;
 
 namespace UserManagementService.Application.Users.Commands
 {
@@ -21,8 +22,10 @@ namespace UserManagementService.Application.Users.Commands
         public async Task Handle(DeleteUserCommand request)
         {
             var user = await _userRepository.FindByIdAsync(request.Id);
-
-            await _userRepository.RemoveAsync(user);
+            user.Delete(
+                SystemClock.Instance.GetCurrentInstant().InUtc()
+             );
+            await _userRepository.UpdateAsync(user);
         }
     }
 }
