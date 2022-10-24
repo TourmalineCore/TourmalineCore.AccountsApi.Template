@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using UserManagementService.Api.Dto.Roles;
+using UserManagementService.Application.Roles;
+using UserManagementService.Application.Roles.Commands;
 using UserManagementService.Application.Roles.Queries;
+using UserManagementService.Application.Users.Commands;
 
 namespace UserManagementService.Api.Controllers
 {
@@ -8,18 +10,35 @@ namespace UserManagementService.Api.Controllers
     public class RolesController : Controller
     {
         private readonly GetRoleListQueryHandler _getRoleListQueryHandler;
+        private readonly GetRoleByIdQueryHandler _getRoleByIdQueryHandler;
+        private readonly DeleteRoleCommandHandler _deleteRoleCommandHandler;
 
-        public RolesController(GetRoleListQueryHandler getRoleListQueryHandler)
+        public RolesController (
+            GetRoleListQueryHandler getRoleListQueryHandler, 
+            GetRoleByIdQueryHandler getRoleByIdQueryHandler,
+            DeleteRoleCommandHandler deleteRoleCommandHandler)
         {
             _getRoleListQueryHandler = getRoleListQueryHandler;
+            _getRoleByIdQueryHandler = getRoleByIdQueryHandler;
+            _deleteRoleCommandHandler = deleteRoleCommandHandler;
         }
 
         [HttpGet("all")]
-        public async Task<IEnumerable<RoleDto>> FindById([FromQuery] GetRoleListQuery getRoleListQuery)
+        public Task<IEnumerable<RoleDto>> FindById([FromQuery] GetRoleListQuery getRoleListQuery)
         {
-            var roles = await _getRoleListQueryHandler.Handle(getRoleListQuery);
+            return _getRoleListQueryHandler.Handle(getRoleListQuery);
+        }
 
-            return roles.Select(x => new RoleDto(x.Id, x.Name));
+        [HttpGet("find/{id}")]
+        public Task<RoleDto> FindById([FromRoute] GetRoleByIdQuery getRoleByIdQuery)
+        {
+            return _getRoleByIdQueryHandler.Handle(getRoleByIdQuery);
+        }
+
+        [HttpGet("delete")]
+        public Task FindById([FromQuery] DeleteRoleCommand deleteRoleCommand)
+        {
+            return _deleteRoleCommandHandler.Handle(deleteRoleCommand);
         }
     }
 }

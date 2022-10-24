@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserManagementService.Core.Contracts;
@@ -21,6 +21,7 @@ namespace UserManagementService.DataAccess
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<IPrivilegeRepository, PrivilegeRepository>();
 
             return services;
         }

@@ -1,4 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using UserManagementService.Application.Privileges.Commands;
+using UserManagementService.Application.Privileges.Queries;
+using UserManagementService.Application.Roles.Commands;
 using UserManagementService.Application.Roles.Queries;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;
@@ -19,6 +22,13 @@ namespace UserManagementService.Application
             services.AddTransient<GetUserByIdQueryHandler>();
 
             services.AddTransient<GetRoleListQueryHandler>();
+            services.AddTransient<GetRoleByIdQueryHandler>();
+            services.AddTransient<DeleteRoleCommandHandler>();
+
+            services.AddTransient<GetPrivilegeListQueryHandler>();
+            services.AddTransient<GetPrivilegeByIdQueryHandler>();
+            services.AddTransient<DeletePrivilegeCommandHandler>();
+            services.AddTransient<AddRoleToPrivilegeCommandHandler>();
 
             return services;
         }
