@@ -37,7 +37,7 @@ namespace UserManagementService.DataAccess.Respositories
                     .Queryable<User>()
                     .Include(x => x.Role)
                     .ThenInclude(x => x.Privileges)
-                    .SingleOrDefaultAsync(x => x.Email == email);
+                    .SingleOrDefaultAsync(x => x.Email == email && x.DeletedAtUtc == null);
         }
 
         public Task<User> FindByIdAsync(long id)
@@ -46,13 +46,14 @@ namespace UserManagementService.DataAccess.Respositories
                     .Queryable<User>()
                     .Include(x => x.Role)
                     .ThenInclude(x => x.Privileges)
-                    .GetByIdAsync(id);
+                    .SingleOrDefaultAsync(x => x.Id == id && x.DeletedAtUtc == null);
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _usersDbContext
                 .QueryableAsNoTracking<User>()
+                .Where(x => x.DeletedAtUtc == null)
                 .ToListAsync();
         }
 

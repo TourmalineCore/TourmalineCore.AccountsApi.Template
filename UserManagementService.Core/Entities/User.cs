@@ -15,7 +15,7 @@ namespace UserManagementService.Core.Entities
         public long RoleId { get; private set; }
 
         public Role Role { get; private set; }
-        public ZonedDateTime DeletedAtUtc { get; private set; } 
+        public string? DeletedAtUtc { get; private set; }
 
         // For DB Context
         private User() { }
@@ -46,7 +46,7 @@ namespace UserManagementService.Core.Entities
         }
         public void Delete(ZonedDateTime deletedAtUtc)
         {
-            DeletedAtUtc = deletedAtUtc;
+            DeletedAtUtc = deletedAtUtc.ToString();
         }
     }
 }
