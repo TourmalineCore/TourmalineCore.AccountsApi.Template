@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using UserManagementService.Application;
 using UserManagementService.DataAccess;
 
@@ -20,10 +22,14 @@ if (environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+using (var serviceScope = app.Services.CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<UsersDbContext>();
+    await context.Database.MigrateAsync();
+}
+
 app.UseRouting();
 
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-
-app.Run();
 
 app.Run();
