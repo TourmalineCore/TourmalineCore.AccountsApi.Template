@@ -13,17 +13,14 @@ namespace UserManagementService.Api.Controllers
         private readonly GetPrivilegeListQueryHandler _getPrivilegeListQueryHandler;
         private readonly GetPrivilegeByIdQueryHandler _getPrivilegeByIdQueryHandler;
         private readonly DeletePrivilegeCommandHandler _deletePrivilegeCommandHandler;
-        private readonly AddRoleToPrivilegeCommandHandler _addRoleToPrivilegeCommandHandler;
 
         public PrivilegesController(
             GetPrivilegeListQueryHandler getPrivilegeListQueryHandler,
             DeletePrivilegeCommandHandler deletePrivilegeCommandHandler,
-            AddRoleToPrivilegeCommandHandler addRoleToPrivilegeCommandHandler,
             GetPrivilegeByIdQueryHandler getPrivilegeByIdQueryHandler)
         {
             _getPrivilegeListQueryHandler = getPrivilegeListQueryHandler;
             _deletePrivilegeCommandHandler = deletePrivilegeCommandHandler;
-            _addRoleToPrivilegeCommandHandler = addRoleToPrivilegeCommandHandler;
             _getPrivilegeByIdQueryHandler = getPrivilegeByIdQueryHandler;
         }
 
@@ -34,7 +31,7 @@ namespace UserManagementService.Api.Controllers
         }
 
         [HttpGet("find/{Id}")]
-        public Task<PrivilegeDto> FindByEmail([FromRoute] GetPrivilegeByIdQuery getPrivilegeByIdQuery)
+        public Task<PrivilegeDto> FindById([FromRoute] GetPrivilegeByIdQuery getPrivilegeByIdQuery)
         {
             return _getPrivilegeByIdQueryHandler.Handle(getPrivilegeByIdQuery);
         }
