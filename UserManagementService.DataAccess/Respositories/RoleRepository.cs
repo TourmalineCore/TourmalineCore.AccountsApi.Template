@@ -22,6 +22,11 @@ namespace UserManagementService.DataAccess.Respositories
 
             return role.Id;
         }
+        public Task AddPrivilegeAsync(Role role, Privilege privilege)
+        {
+            role.Privileges.Add(privilege);
+            return _usersDbContext.SaveChangesAsync();
+        }
 
         public Task<Role> FindByIdAsync(long id)
         {

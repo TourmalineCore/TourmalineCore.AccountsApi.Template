@@ -17,7 +17,7 @@ namespace UserManagementService.Core.Entities
 
         public string NormalizedName { get; private set; }
 
-        public List<Privilege> Privileges { get; private set; }
+        public List<Privilege> Privileges { get; private set; } = new List<Privilege>();
 
         // For Db Context
         private Role() { }
@@ -26,6 +26,7 @@ namespace UserManagementService.Core.Entities
         {
             Name = name;
             NormalizedName = name.ToString().Normalize();
+
         }
 
         public Role(long id, RoleNames name)
@@ -39,6 +40,11 @@ namespace UserManagementService.Core.Entities
         {
             Name = name;
             NormalizedName = name.ToString().Normalize();
+        }
+        public void AddPrivilege(Privilege privilege)
+        {
+            
+            Privileges.Add(privilege);
         }
     }
 }

@@ -18,12 +18,6 @@ namespace UserManagementService.DataAccess.Respositories
         {
             _usersDbContext = usersDbContext;
         }
-        public Task AddRoleAsync(Privilege privilege, Role role)
-        {
-            privilege.AddRole(role);
-
-            return _usersDbContext.SaveChangesAsync();
-        }
 
         public async Task<long> CreateAsync(Privilege privilege)
         {

@@ -12,15 +12,18 @@ namespace UserManagementService.Api.Controllers
         private readonly GetRoleListQueryHandler _getRoleListQueryHandler;
         private readonly GetRoleByIdQueryHandler _getRoleByIdQueryHandler;
         private readonly DeleteRoleCommandHandler _deleteRoleCommandHandler;
+        private readonly AddPrivilegeCommandHandler _addPrivilegeCommandhandler;
 
         public RolesController (
             GetRoleListQueryHandler getRoleListQueryHandler, 
             GetRoleByIdQueryHandler getRoleByIdQueryHandler,
-            DeleteRoleCommandHandler deleteRoleCommandHandler)
+            DeleteRoleCommandHandler deleteRoleCommandHandler,
+            AddPrivilegeCommandHandler addPrivilegeCommandHandler)
         {
             _getRoleListQueryHandler = getRoleListQueryHandler;
             _getRoleByIdQueryHandler = getRoleByIdQueryHandler;
             _deleteRoleCommandHandler = deleteRoleCommandHandler;
+            _addPrivilegeCommandhandler = addPrivilegeCommandHandler;
         }
 
         [HttpGet("all")]
@@ -39,6 +42,12 @@ namespace UserManagementService.Api.Controllers
         public Task FindById([FromQuery] DeleteRoleCommand deleteRoleCommand)
         {
             return _deleteRoleCommandHandler.Handle(deleteRoleCommand);
+        }
+
+        [HttpPost("add-privilege")]
+        public Task AddPrivilege([FromBody] AddPrivilegeCommand addPrivilegeCommand)
+        {
+            return _addPrivilegeCommandhandler.Handle(addPrivilegeCommand);
         }
     }
 }

@@ -24,6 +24,7 @@ namespace UserManagementService.Application
             services.AddTransient<GetRoleListQueryHandler>();
             services.AddTransient<GetRoleByIdQueryHandler>();
             services.AddTransient<DeleteRoleCommandHandler>();
+            services.AddTransient<AddPrivilegeCommandHandler>();
 
             services.AddTransient<GetPrivilegeListQueryHandler>();
             services.AddTransient<GetPrivilegeByIdQueryHandler>();

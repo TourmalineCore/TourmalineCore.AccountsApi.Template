@@ -9,6 +9,5 @@ namespace UserManagementService.Core.Contracts
 {
     public interface IPrivilegeRepository : IRepository<Privilege>
     {
-        public Task AddRoleAsync(Privilege privilege, Role role);
     }
 }

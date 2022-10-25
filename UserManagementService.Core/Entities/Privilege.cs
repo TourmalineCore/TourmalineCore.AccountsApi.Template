@@ -26,8 +26,4 @@ public class Privilege : IIdentityEntity
         Id = id;
         Name = name;
     }
-    public void AddRole(Role role)
-    {
-        Roles.Add(role);
-    }
 }
