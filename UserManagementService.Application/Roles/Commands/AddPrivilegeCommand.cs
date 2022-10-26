@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using UserManagementService.Application.Contracts;
 using UserManagementService.Core.Contracts;
+using UserManagementService.Core.Entities;
 
 namespace UserManagementService.Application.Roles.Commands
 {
     public class AddPrivilegeCommand
     {
         public long RoleId { get; set; }
-        public long PrivilegeId { get; set; }
+        public List<long> PrivilegeId { get; set; }
     }
 
     public class AddPrivilegeCommandHandler : ICommandHandler<AddPrivilegeCommand>
@@ -28,9 +29,13 @@ namespace UserManagementService.Application.Roles.Commands
         public async Task Handle(AddPrivilegeCommand request)
         {
             var role = await _roleRepository.FindByIdAsync(request.RoleId);
-            var privilege = await _privilegeRepository.FindByIdAsync(request.PrivilegeId);
+            List<Privilege> privileges = new List<Privilege>();
+            foreach (var x in request.PrivilegeId)
+            {
+                privileges.Add(await _privilegeRepository.FindByIdAsync(x));
+            }
 
-            await _roleRepository.AddPrivilegeAsync(role, privilege);
+            await _roleRepository.AddPrivilegeAsync(role, privileges);
         }
     }
 }
