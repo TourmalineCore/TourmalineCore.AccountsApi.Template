@@ -22,9 +22,7 @@ namespace UserManagementService.Application.Users.Commands
         public async Task Handle(DeleteUserCommand request)
         {
             var user = await _userRepository.FindByIdAsync(request.Id);
-            user.Delete(
-                SystemClock.Instance.GetCurrentInstant().InUtc()
-             );
+            user.Delete();
             await _userRepository.UpdateAsync(user);
         }
     }
