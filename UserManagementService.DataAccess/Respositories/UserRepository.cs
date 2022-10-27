@@ -46,7 +46,7 @@ namespace UserManagementService.DataAccess.Respositories
                     .Queryable<User>()
                     .Include(x => x.Role)
                     .ThenInclude(x => x.Privileges)
-                    .SingleOrDefaultAsync(x => x.Id == id && x.DeletedAtUtc == null);
+                    .SingleAsync(x => x.Id == id && x.DeletedAtUtc == null);
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
