@@ -41,10 +41,9 @@ namespace UserManagementService.Core.Entities
             Name = name;
             NormalizedName = name.ToString().Normalize();
         }
-        public void AddPrivilege(Privilege privilege)
+        public void UpdateRole(List<Privilege> privileges)
         {
-            
-            Privileges.Add(privilege);
+            Privileges = privileges;
         }
     }
 }

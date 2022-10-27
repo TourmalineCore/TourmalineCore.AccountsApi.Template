@@ -35,7 +35,7 @@ namespace UserManagementService.Application.Roles.Commands
                 privileges.Add(await _privilegeRepository.FindByIdAsync(x));
             }
 
-            await _roleRepository.AddPrivilegeAsync(role, privileges);
+            await _roleRepository.UpdateRoleAsync(role, privileges);
         }
     }
 }

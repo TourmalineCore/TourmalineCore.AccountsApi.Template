@@ -6,6 +6,6 @@ namespace UserManagementService.Core.Contracts
 {
     public interface IRoleRepository : IRepository<Role>
     {
-        public Task AddPrivilegeAsync(Role role, List<Privilege> privilege);
+        public Task UpdateRoleAsync(Role role, List<Privilege> privilege);
     }
 }
