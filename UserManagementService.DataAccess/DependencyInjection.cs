@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserManagementService.Core.Contracts;
@@ -14,7 +14,8 @@ namespace UserManagementService.DataAccess
 
             services.AddDbContext<UsersDbContext>(options =>
             {
-                options.UseNpgsql(connectionString);
+                options.UseNpgsql(connectionString,
+                                o => o.UseNodaTime());
             });
 
             services.AddScoped<UsersDbContext>();
