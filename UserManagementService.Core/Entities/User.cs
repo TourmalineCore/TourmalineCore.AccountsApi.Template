@@ -1,7 +1,4 @@
 using NodaTime;
-using NodaTime.Extensions;
-using static NodaTime.Extensions.ClockExtensions;
-using System.Xml.Linq;
 
 namespace UserManagementService.Core.Entities
 {
@@ -18,7 +15,7 @@ namespace UserManagementService.Core.Entities
         public long RoleId { get; private set; }
 
         public Role Role { get; private set; }
-        public IClock DeletedAtUtc { get; private set; }
+        public Instant? DeletedAtUtc { get; private set; } = null;
 
         // For DB Context
         private User() { }
@@ -47,9 +44,9 @@ namespace UserManagementService.Core.Entities
         {
             Role = role;
         }
-        public void Delete()
+        public void Delete(Instant deletedAtUtc)
         {
-            DeletedAtUtc.InUtc();
+            DeletedAtUtc = deletedAtUtc;
         }
     }
 }
