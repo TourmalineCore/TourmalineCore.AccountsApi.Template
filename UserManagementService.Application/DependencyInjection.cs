@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using NodaTime;
 using UserManagementService.Application.Roles.Queries;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;
@@ -19,6 +20,9 @@ namespace UserManagementService.Application
             services.AddTransient<GetUserByIdQueryHandler>();
 
             services.AddTransient<GetRoleListQueryHandler>();
+
+            services.AddTransient<IClock, Clock>();
+
 
             return services;
         }
