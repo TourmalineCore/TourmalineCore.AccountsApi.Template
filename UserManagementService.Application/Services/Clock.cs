@@ -1,7 +1,7 @@
 using NodaTime;
 using System;
 
-namespace UserManagementService.Application.Users.Commands
+namespace UserManagementService.Application.Services
 {
     public class Clock : IClock
     {
