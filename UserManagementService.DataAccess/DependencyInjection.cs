@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NodaTime;
 using UserManagementService.Core.Contracts;
 using UserManagementService.DataAccess.Respositories;
 
@@ -22,6 +23,7 @@ namespace UserManagementService.DataAccess
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<IClock, Clock>();
 
             return services;
         }

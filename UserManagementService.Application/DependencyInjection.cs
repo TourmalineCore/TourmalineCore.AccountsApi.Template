@@ -1,9 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
-using NodaTime;
 using UserManagementService.Application.Roles.Queries;
 using UserManagementService.Application.Users.Commands;
 using UserManagementService.Application.Users.Queries;
-using UserManagementService.DataAccess.Respositories;
 
 namespace UserManagementService.Application
 {
@@ -14,7 +12,6 @@ namespace UserManagementService.Application
             services.AddTransient<CreateUserCommandHandler>();
             services.AddTransient<UpdateUserCommandHandler>();
             services.AddTransient<DeleteUserCommandHandler>();
-            services.AddTransient<IClock, InstantTime>();
             services.AddTransient<AddRoleToUserCommandHandler>();
 
             services.AddTransient<GetUserByEmailQueryHandler>();
