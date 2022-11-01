@@ -1,3 +1,5 @@
+using NodaTime;
+
 namespace UserManagementService.Core.Entities
 {
     public class User : IIdentityEntity
@@ -13,6 +15,7 @@ namespace UserManagementService.Core.Entities
         public long RoleId { get; private set; }
 
         public Role Role { get; private set; }
+        public Instant? DeletedAtUtc { get; private set; } = null;
 
         // For DB Context
         private User() { }
@@ -40,6 +43,10 @@ namespace UserManagementService.Core.Entities
         public void AddRole(Role role)
         {
             Role = role;
+        }
+        public void Delete(Instant deletedAtUtc)
+        {
+            DeletedAtUtc = deletedAtUtc;
         }
     }
 }
